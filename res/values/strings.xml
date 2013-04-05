@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">爱动</string>
+    <string name="action_settings">Settings</string>
+    <string name="bottombar_text_suggest">热点推荐</string>
+    <string name="bottombar_text_search">浏览搜索</string>
+    <string name="bottombar_text_mine">我的爱动</string>
+    <string name="login_text_title">爱    动</string>
+    <string name="login_text_username">用户名</string>
+    <string name="login_text_password">密  码</string>
+
+</resources>
