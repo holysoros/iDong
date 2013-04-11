@@ -45,7 +45,7 @@ public class FragmentMine extends Fragment
             return null;
 		} else {
 			LayoutInflater myInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-		    View layout = myInflater.inflate(R.layout.fraagment_mine, container, false); 
+		    View layout = myInflater.inflate(R.layout.fragment_mine, container, false); 
 			
 			return layout;
 		}

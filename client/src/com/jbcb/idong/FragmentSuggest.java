@@ -33,7 +33,7 @@ public class FragmentSuggest extends Fragment
             return null;
         }
 		LayoutInflater myInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
-	    View layout = myInflater.inflate(R.layout.fraagment_suggest, container, false); 
+	    View layout = myInflater.inflate(R.layout.fragment_suggest, container, false); 
 		
 		return layout;
 	}

@@ -46,11 +46,15 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.jbcb.idong.widget.ImageListView
+        android:id="@+id/lv_search_partylist"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/bottombar_text_search"
-        android:textSize="30sp" />
+        android:layout_below="@+id/rl_title"
+        android:divider="#bfffff"  
+ 	    android:background="#00000000"
+        android:dividerHeight="10dp" 
+        android:orientation="vertical" >
+    </com.jbcb.idong.widget.ImageListView>
 
 </RelativeLayout>
