@@ -5,4 +5,5 @@ urlpatterns = patterns('idong.views',
     url(r'^users/$',    'user_list'),
     url(r'^parties/$',  'party_list'),
     url(r'^parties/(?P<pk>[0-9]+)/$', 'party_detail'),
+    url(r'^userparty/(?P<userid>[0-9]+)/$', 'user_party'),
 )

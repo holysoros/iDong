@@ -68,4 +68,13 @@ def party_detail(request, pk):
         party.delete()
         return HttpResponse(status=204)
 
+@csrf_exempt
+def user_party(request, userid):
+    try:
+        parties = UserParty.objects.get(user=userid)
+    except UserParty.DoesNotExist:
+        return HttpResponse(status=404)
 
+    if request.method == 'GET':
+        serializer = UserPartySerializer(parties)
+        return JSONResponse(serializer.data)
