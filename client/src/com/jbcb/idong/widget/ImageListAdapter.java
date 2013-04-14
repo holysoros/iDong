@@ -1,8 +1,6 @@
 package com.jbcb.idong.widget;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import com.jbcb.idong.R;
 import com.jbcb.idong.model.Party;
@@ -59,18 +57,10 @@ public class ImageListAdapter extends BaseAdapter {
 		
 		tv_title.setText(party.getTitle());
 		tv_detail.setText(party.getDescription());
-		Set<String> imageURLSet = party.getPartyImageURLSet();
-		Iterator<String> it = imageURLSet.iterator();
-		String imageURLtmp = "";
-		while (it.hasNext()) {
-			imageURLtmp = it.next().toString();
-			break;
-		}
-		final String imageURL = imageURLtmp;
-		
-		iv_partyicon.setImageBitmap(CommonUtility.getImageThumbnail(imageURL, 80, 80));
+		iv_partyicon.setImageBitmap(party.getThumbnail());
+		final String imageURL = party.getThumbnailURL();
+
 		iv_partyicon.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
