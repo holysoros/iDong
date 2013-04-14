@@ -5,58 +5,65 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ListView;
 
+/**
+ * @ClassName ImageListView.java
+ * @author Clame
+ * 
+ */
 public class ImageListView extends ListView {
 
-	private ImageListAdapter mSelfAdapter;
+    private ImageListAdapter mAdapter;
 
-	public ImageListView(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
-	}
+    public ImageListView(Context context) {
+        super(context);
+        // TODO Auto-generated constructor stub
+    }
 
-	public ImageListView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		// TODO Auto-generated constructor stub
-	}
+    public ImageListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // TODO Auto-generated constructor stub
+    }
 
-	public ImageListView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
-	}
+    public ImageListView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * 删除ListView中上一次渲染的View，并添加新View。
-	 */
-	private void buildList() {
-		if (mSelfAdapter == null) {
+    /**
+     * @FunName buildList
+     * @Description build the list
+     * @param N/A
+     * @return N/A
+     * 
+     */
+    private void buildList() {
+        if (mAdapter == null) {
 
-		}
+        }
 
-		if (getChildCount() > 0) {
-			removeAllViews();
-		}
+        if (getChildCount() > 0) {
+            removeAllViews();
+        }
 
-		int count = mSelfAdapter.getCount();
+        int count = mAdapter.getCount();
 
-		for (int i = 0; i < count; i++) {
-			View view = mSelfAdapter.getView(i, null, null);
-			if (view != null) {
-				addView(view, i);
-			}
-		}
-	}
+        for (int i = 0; i < count; i++) {
+            View view = mAdapter.getView(i, null, null);
+            if (view != null) {
+                addView(view, i);
+            }
+        }
+    }
 
-	public ImageListAdapter getSelfAdapter() {
-		return mSelfAdapter;
-	}
-
-	/**
-	 * 设置Adapter。
-	 * 
-	 * @param selfAdapter
-	 */
-	public void setSelfAdapter(ImageListAdapter selfAdapter) {
-		this.mSelfAdapter = selfAdapter;
-		buildList();
-	}
+    /**
+     * @FunName setSelfAdapter
+     * @Description set the adapter for the listview
+     * @param adapter
+     * @return N/A
+     * 
+     */
+    public void setSelfAdapter(ImageListAdapter adapter) {
+        this.mAdapter = adapter;
+        buildList();
+    }
 }

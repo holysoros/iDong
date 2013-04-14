@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 
+/**
+ * @category LaunchActivity.java
+ * @author Clame
+ *
+ */
 public class LaunchActivity extends Activity {
 
 	@Override
@@ -14,7 +19,6 @@ public class LaunchActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		
 		Thread waitThread = new Thread() {
@@ -36,7 +40,7 @@ public class LaunchActivity extends Activity {
 				});
 			}
 		};
-		waitThread.start();
-	}
+        waitThread.start();
+    }
 
 }
