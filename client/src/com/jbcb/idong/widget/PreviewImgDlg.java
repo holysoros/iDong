@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
+/**
+ * @ClassName PreviewImgDlg.java
+ * @author Clame
+ * 
+ */
 public class PreviewImgDlg extends Activity {
 
 	/** Called when the activity is first created. */
@@ -19,23 +25,25 @@ public class PreviewImgDlg extends Activity {
 	    requestWindowFeature(Window.FEATURE_NO_TITLE);   
 	    
 	    ImageView image=new ImageView(this);
-        image.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+        image.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
         setContentView(image);
         
 		Intent intent = this.getIntent();
 		if (intent.getExtras() != null) {
-			String imagePath = intent.getExtras().getString("imagepath");
+			String imagePath = intent.getExtras().getString("imageurl");
 			
 			BitmapFactory.Options options = new BitmapFactory.Options();
 			options.inJustDecodeBounds = true;
 			Bitmap bmp = BitmapFactory.decodeFile(imagePath, options);
 			
-			int width = options.outWidth;//¿í
-			int height = options.outHeight;//¸ß
+			int width = options.outWidth;//ï¿½ï¿½
+			int height = options.outHeight;//ï¿½ï¿½
 			
 			Display display = getWindowManager().getDefaultDisplay();
-			int screenHeight = display.getHeight();
-			int screenWidth = display.getWidth();
+			Point point = new Point();
+			display.getSize(point);
+			int screenHeight = point.y;
+			int screenWidth = point.x;
 			
 			boolean isWidthBig = false;
 			boolean isHeightBig = false;
@@ -66,8 +74,6 @@ public class PreviewImgDlg extends Activity {
 			bmp = BitmapFactory.decodeFile(imagePath, options);
 			image.setImageBitmap(bmp);
 		}
-		
-	    // TODO Auto-generated method stub
 	}
 
 }

@@ -1,8 +1,10 @@
 package com.jbcb.idong.utilities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -10,79 +12,148 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 
+/**
+ * @ClassName CommonUtility.java
+ * @Description Some common methods
+ * @author Clame
+ * 
+ */
 public class CommonUtility {
-	public static String getAppPath() {
-		String appPath = "";
-		if (android.os.Environment.MEDIA_MOUNTED.equals(android.os.Environment
-				.getExternalStorageState())) {
-			appPath = android.os.Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + "/iDong";
-		} else {
-			appPath = android.os.Environment.getDataDirectory()
-					.getAbsolutePath() + "/iDong";
-		}
 
-		File app = new File(appPath);
-		if (!app.exists()) {
-			app.mkdir();
-		}
+    /**
+     * @FunName getAppPath
+     * @Description get the path of iDong app
+     * @param N/A
+     * @return the path of iDong app
+     * 
+     */
+    public static String getAppPath() {
+        String appPath = "";
+        if (android.os.Environment.MEDIA_MOUNTED.equals(android.os.Environment.getExternalStorageState())) {
+            appPath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/iDong";
+        } else {
+            appPath = android.os.Environment.getDataDirectory().getAbsolutePath() + "/iDong";
+        }
 
-		return appPath;
-	}
+        File app = new File(appPath);
+        if (!app.exists()) {
+            app.mkdir();
+        }
 
-	/**
-	 * 根据指定的图像路径和大小来获取缩略图 此方法有两点好处： 1.
-	 * 使用较小的内存空间，第一次获取的bitmap实际上为null，只是为了读取宽度和高度，
-	 * 第二次读取的bitmap是根据比例压缩过的图像，第三次读取的bitmap是所要的缩略图。 2.
-	 * 缩略图对于原图像来讲没有拉伸，这里使用了2.2版本的新工具ThumbnailUtils，使 用这个工具生成的图像不会被拉伸。
-	 * 
-	 * @param imagePath
-	 *            图像的路径
-	 * @param width
-	 *            指定输出图像的宽度
-	 * @param height
-	 *            指定输出图像的高度
-	 * @return 生成的缩略图
-	 */
-	public static Bitmap getImageThumbnail(String imagePath, int width, int height) {
-		Bitmap bitmap = null;
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = false;
-		// 获取这个图片的宽和高，注意此处的bitmap为null
-        URL url;
+        return appPath;
+    }
+
+    /**
+     * @FunNam0 getImageThumbnail
+     * @Description get the thumbnail of an bitmap from Internet with the appointed width and height
+     * @param bitmapURL
+     * @param width
+     * @param height
+     * @return the thumbnail of an image
+     * 
+     */
+    public static Bitmap getImageThumbnail(String bitmapURL, int width, int height) {
+        Bitmap bitmap = null;
         InputStream in = null;
-		try {
-			url = new URL(imagePath);
-	        in=url.openStream();  
-			bitmap = BitmapFactory.decodeStream(in, null, options);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// 计算缩放比
-		int h = options.outHeight;
-		int w = options.outWidth;
-		int beWidth = w / width;
-		int beHeight = h / height;
-		int be = 1;
-		if (beWidth < beHeight) {
-			be = beWidth;
-		} else {
-			be = beHeight;
-		}
-		if (be <= 0) {
-			be = 1;
-		}
-		options.inSampleSize = be;
-		// 利用ThumbnailUtils来创建缩略图，这里要指定要缩放哪个Bitmap对象
-		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
-				ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
-		return bitmap;
-	}
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        // set the inJustDecodeBounds as false to get a real bitmap object
+        options.inJustDecodeBounds = false;
+
+        try {
+            URL url = new URL(bitmapURL);
+            in = url.openStream();
+            bitmap = BitmapFactory.decodeStream(in, null, options);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        // get the basic height and width of the bitmap
+        int basicHeight = options.outHeight;
+        int basicWidth = options.outWidth;
+
+        // get the scaling
+        int beHeight = basicHeight / height;
+        int beWidth = basicWidth / width;
+        int be = 1;
+        if (beWidth < beHeight) {
+            be = beWidth;
+        } else {
+            be = beHeight;
+        }
+        if (be <= 0) {
+            be = 1;
+        }
+        options.inSampleSize = be;
+
+        // get the thumbnail of the bitmap
+        bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height, ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+
+        return bitmap;
+    }
+    
+    /**
+     * @FunName getData
+     * @Description get data from the parties URL
+     * @param N/A
+     * @return N/A
+     * 
+     */
+    public static String getWebData(String URL) {
+        String path = "URL";
+        URL url = null;
+        byte[] data = null;
+        String jsonStr = "";
+        
+        try {
+            url = new URL(path);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        HttpURLConnection conn;
+        try {
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(5 * 1000);
+            conn.setRequestMethod("GET");
+            InputStream inStream = conn.getInputStream();
+            data = readInputSream(inStream);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return jsonStr;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return jsonStr;
+        }
+
+        jsonStr = new String(data);        
+        return jsonStr;
+    }
+
+    /**
+     * @FunName readInputSream
+     * @Description read the input stream, and save it as byte[]
+     * @param inStream
+     * @return byte[]
+     * 
+     */
+    private static byte[] readInputSream(InputStream inStream) throws Exception {
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while ((len = inStream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, len);
+        }
+        inStream.close();
+        return outStream.toByteArray();
+    }
 }
