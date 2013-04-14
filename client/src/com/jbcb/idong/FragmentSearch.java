@@ -54,7 +54,15 @@ public class FragmentSearch extends Fragment {
 				false);
 
 		final List<Party> partyList = new ArrayList<Party>();
-		getData();
+
+		new Thread() {
+
+			@Override
+			public void run() {
+				getData();
+			}
+		}.start();
+		
 
 		for (int i = 0; i < 3; i++) {
 			Party party = new Party();
@@ -93,7 +101,7 @@ public class FragmentSearch extends Fragment {
 	}
 
 	private void getData() {
-		String path = "http://holyweibo.sinaapp.com/parties/.json";
+		String path = "http://holyweibo.sinaapp.com/parties/";
 		URL url = null;
 		byte[] data = null;
 		try {
@@ -116,8 +124,8 @@ public class FragmentSearch extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		String json=new String(data);
+
+		String json = new String(data);
 		int a = 1;
 		// Handler handler = new Handler();
 		// thread = new HttpThread(handler, this.getActivity()); // 建立线程实例
