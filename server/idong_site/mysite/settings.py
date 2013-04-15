@@ -5,18 +5,25 @@ if 'SERVER_SOFTWARE' in os.environ:
     from sae.const import (
         MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB
     )
+    PROJECT_ROOT = ''
 else:
     # Make `python manage.py syncdb` works happy!
     MYSQL_HOST = ''
     MYSQL_PORT = ''
     MYSQL_USER = 'root'
-    MYSQL_PASS = 'soros'
+    MYSQL_PASS = '2ol3'
     MYSQL_DB   = 'app_holyweibo' 
+    PROJECT_ROOT = '/home/bing/Projects/Python/iDong/server/idong_site/idong'
 
 # Django settings for mysite project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+)
+
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

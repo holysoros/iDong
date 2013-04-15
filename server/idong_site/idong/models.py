@@ -73,3 +73,12 @@ class PartyType:
     name = models.CharField(max_length='20')
     description = models.TextField(max_length='400')
     calorie_per_hour = models.PositiveSmallIntegerField()
+
+class UserImages:
+    user = models.ForeignKey('auth.User', related_name='user_images')
+    url  = models.CharField(max_length=4000 )
+
+class PartyImages:
+    party = models.ForeignKey(Party, related_name='party_images')
+    url   = models.CharField(max_length=4000)
+
