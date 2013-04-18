@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from idong.models import Party
+from idong.models import Party, UserImages, PartyImages
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,3 +28,13 @@ class PartyDetailSerializer(serializers.ModelSerializer):
         # to show who also participate
         fields = ('id', 'title', 'category', 'start_time', 'end_time', 'location',
             'participant_num', 'liker_num', 'image_urls', 'laucher_user', 'description', )
+
+class UserImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserImages
+        fields = ('id', 'user', 'date','title', 'image', 'imgtype')
+
+class PartyImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PartyImages
+        fields = ('id', 'party', 'date','title', 'image', 'imgtype')
