@@ -14,7 +14,7 @@ python:
 
 env:
   global:
-    - secure: "CzVJonXL5R68jtbUdkYYLuK9h3q0fWlk1bsh8vBfPJNbm74H0eeqo1Z4vbRl\n2naurz1PBcTqz50APWEfp5cuX1S562ONAONK9SCwb6XvuZSyEUC7TWBUThxI\nTvUfWdZvXg57UZiG2ZOYxwlq8XYe9+5T48TVB7eY+85d8fOROwo="
+    - MY_SECURE: "CzVJonXL5R68jtbUdkYYLuK9h3q0fWlk1bsh8vBfPJNbm74H0eeqo1Z4vbRl\n2naurz1PBcTqz50APWEfp5cuX1S562ONAONK9SCwb6XvuZSyEUC7TWBUThxI\nTvUfWdZvXg57UZiG2ZOYxwlq8XYe9+5T48TVB7eY+85d8fOROwo="
 
 # command to install dependencies
 install:
@@ -23,6 +23,7 @@ install:
 
 # command to run tests
 script: nosetests 
+  - echo $MY_SECURE
 
 after_script:
   - env
