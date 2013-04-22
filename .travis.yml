@@ -12,6 +12,10 @@ python:
   # maintainers to fix their pypy-dev package.
   #- "pypy"
 
+env:
+  global:
+    - secure: "CzVJonXL5R68jtbUdkYYLuK9h3q0fWlk1bsh8vBfPJNbm74H0eeqo1Z4vbRl\n2naurz1PBcTqz50APWEfp5cuX1S562ONAONK9SCwb6XvuZSyEUC7TWBUThxI\nTvUfWdZvXg57UZiG2ZOYxwlq8XYe9+5T48TVB7eY+85d8fOROwo="
+
 # command to install dependencies
 install:
   - pip install -r requirements.txt --use-mirrors
@@ -22,3 +26,5 @@ script: nosetests
 
 after_script:
   - env
+  - which svn
+  - ls -al
