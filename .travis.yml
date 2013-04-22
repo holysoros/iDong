@@ -27,5 +27,5 @@ script: nosetests
 after_script:
   - echo "$MY_SECURE"
   - env
-  - svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password soros
+  - svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password soros --no-auth-cache
   - ls -al
