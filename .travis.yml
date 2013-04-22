@@ -23,9 +23,9 @@ install:
 
 # command to run tests
 script: nosetests 
-  - echo $MY_SECURE
 
 after_script:
+  - echo "$MY_SECURE"
   - env
-  - which svn
+  - svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password soros
   - ls -al
