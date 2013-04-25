@@ -14,7 +14,7 @@ python:
 
 env:
   global:
-    - MY_SECURE: "CzVJonXL5R68jtbUdkYYLuK9h3q0fWlk1bsh8vBfPJNbm74H0eeqo1Z4vbRl\n2naurz1PBcTqz50APWEfp5cuX1S562ONAONK9SCwb6XvuZSyEUC7TWBUThxI\nTvUfWdZvXg57UZiG2ZOYxwlq8XYe9+5T48TVB7eY+85d8fOROwo="
+    - secure: "MENTH3dKpndihQ1WAu1Twtv0bUeCcRPgGTbjx6F3lpaWQ9/JCuq+SksRZZ9M\nnCmoPYHmWPRrwj5LKA2P56mWHmyyd1EO7X9MKNI5hSivW3rJIvldkHP259j1\nf5LGNB1hDlfiGbI+/YkNAj07QnSeYCMxfJNMzSM4tfgscp6TuEY="
 
 # command to install dependencies
 install:
@@ -25,7 +25,6 @@ install:
 script: nosetests 
 
 after_script:
-  - echo "$MY_SECURE"
   - env
-  - svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password soros --no-auth-cache
+  - svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache
   - ls -al
