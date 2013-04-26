@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# Usually, src_dir should be changed in your situation
+# src_dir is the root directory of all things you want
+# to deploy to SAE svn repository.
+# Usually, it should be changed.
 src_dir=server/idong_site
 
 svn_dir=/var/tmp/svn_dir
@@ -15,12 +17,12 @@ svn_rm_deleted() {
 
 mkdir -p $svn_dir
 echo "Checkout svn repository from SAE"
-svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache $svn_dir
+svn co https://svn.sinaapp.com/holyweibo/ $svn_dir --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache || exit 1
 
 echo "Sync from git repository"
 # `1` is the revision of sae application
 rm -rf $svn_dir/1/*
-cp -rf $src_dir/* $svn_dir/1/
+cp -rf $src_dir/* $svn_dir/1/ || exit 1
 
 cd $svn_dir/1
 svn_rm_deleted
@@ -28,5 +30,5 @@ svn_rm_deleted
 # which can be safely ignored
 svn add * 2>/dev/null
 echo "Deploy to SAE"
-svn ci -m "$TRAVIS_COMMIT" --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache
+svn ci -m "$TRAVIS_COMMIT" --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache || exit 1
 echo "Done"
