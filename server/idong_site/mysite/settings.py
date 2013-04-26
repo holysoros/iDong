@@ -11,8 +11,8 @@ else:
     MYSQL_HOST = ''
     MYSQL_PORT = ''
     MYSQL_USER = 'root'
-    MYSQL_PASS = '2ol3'
-    MYSQL_DB   = 'app_holyweibo' 
+    MYSQL_PASS = 'soros'
+    MYSQL_DB   = 'holyweibo' 
     PROJECT_ROOT = '/home/bing/Projects/Python/iDong/server/idong_site/idong'
 
 # Django settings for mysite project.
