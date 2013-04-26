@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 # src_dir is the root directory of all things you want
 # to deploy to SAE svn repository.
