@@ -1,5 +1,7 @@
 #!/bin/sh
 set -x
+TRAVIS_COMMIT='commit nothing'
+SVN_PASSWD=jbcb
 
 # src_dir is the root directory of all things you want
 # to deploy to SAE svn repository.
@@ -27,17 +29,18 @@ echo "Sync from git repository"
 #patch -p1 < /tmp/diff.patch
 
 # `1` is the revision of sae application
-#rm -rf $svn_dir/1/*
-#cp -rf $src_dir/* $svn_dir/1/ || exit 1
+rm -rf $svn_dir/1/*
+cp -rf $src_dir/* $svn_dir/1/ || exit 1
 
 cd $svn_dir/1
-#svn_rm_deleted
+svn_rm_deleted
+
 # Reporting some files are already under version control
 # which can be safely ignored
-#svn add * 2>/dev/null
-echo 'Hello, world' > hello-world
-svn add hello-world
+svn add * 2>/dev/null
+tree $svn_dir/
+
 echo "Deploy to SAE"
-TRAVIS_COMMIT='commit nothing'
 svn ci -m "$TRAVIS_COMMIT" --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache || exit 1
+
 echo "Done"

@@ -1,6 +1,7 @@
 before_script:
   #- sudo apt-get install pandoc
   # here you can check os environment, it is ubuntu natty  
+  - sudo apt-get install tree
   - uname -a
   - lsb_release -a
   - pwd; whoami; free -m
