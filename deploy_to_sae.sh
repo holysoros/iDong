@@ -37,8 +37,7 @@ svn_rm_deleted
 
 # Reporting some files are already under version control
 # which can be safely ignored
-svn add * 2>/dev/null
-tree $svn_dir/
+#svn add * 2>/dev/null
 
 echo "Deploy to SAE"
 svn ci -m "$TRAVIS_COMMIT" --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache || exit 1
