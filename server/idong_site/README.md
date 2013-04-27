@@ -12,3 +12,4 @@ Creating table django_site
 
 root user: junjie
 password: s***s
+

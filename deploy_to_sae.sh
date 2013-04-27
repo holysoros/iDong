@@ -33,7 +33,7 @@ echo "Sync from git repository"
 cp -rf $src_dir/* $svn_dir/1/ || exit 1
 
 cd $svn_dir/1
-svn_rm_deleted
+#svn_rm_deleted
 
 # Reporting some files are already under version control
 # which can be safely ignored
