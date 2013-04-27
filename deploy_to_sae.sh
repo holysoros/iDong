@@ -29,15 +29,15 @@ echo "Sync from git repository"
 #patch -p1 < /tmp/diff.patch
 
 # `1` is the revision of sae application
-rm -rf $svn_dir/1/*
+#rm -rf $svn_dir/1/*
 cp -rf $src_dir/* $svn_dir/1/ || exit 1
 
 cd $svn_dir/1
-svn_rm_deleted
+#svn_rm_deleted
 
 # Reporting some files are already under version control
 # which can be safely ignored
-#svn add * 2>/dev/null
+svn add * 2>/dev/null
 
 echo "Deploy to SAE"
 svn ci -m "$TRAVIS_COMMIT" --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache || exit 1
