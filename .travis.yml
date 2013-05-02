@@ -28,6 +28,5 @@ script: nosetests
 
 after_script:
   - env
-  #- svn co https://svn.sinaapp.com/holyweibo/ --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache
-  - ./deploy_to_sae.sh server/idong_site
+  - ./sync-git-to-sae.sh holysoros@163.com server/idong_site
   - ls -al
