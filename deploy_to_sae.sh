@@ -6,7 +6,7 @@ set -x
 # Usually, it should be changed.
 src_dir=$1
 
-svn_dir=/var/tmp/svn_dir
+svn_dir=svn_dir
 
 # remove the deleted items in git from svn repository
 svn_rm_deleted() {
