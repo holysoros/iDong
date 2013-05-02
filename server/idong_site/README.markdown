@@ -11,5 +11,5 @@ Creating table django_session
 Creating table django_site
 
 root user: junjie
-password: s***s
+password: jb*b
 
