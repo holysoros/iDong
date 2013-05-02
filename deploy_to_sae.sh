@@ -6,7 +6,7 @@ set -x
 # Usually, it should be changed.
 src_dir=$1
 
-svn_dir=svn_dir
+svn_dir=/var/tmp/svn_dir
 
 # remove the deleted items in git from svn repository
 svn_rm_deleted() {
@@ -24,15 +24,16 @@ svn_add_new() {
     fi
 }
 
-mkdir -p $svn_dir
 echo "Checkout svn repository from SAE"
 svn co https://svn.sinaapp.com/holyweibo/ $svn_dir --username holysoros@163.com --password $SVN_PASSWD --no-auth-cache || exit 1
 
 echo "Sync from git repository"
 
-# `1` is the revision of sae application
-#rm -rf $svn_dir/1/*
-cp -rf $src_dir/* $svn_dir/1/ || exit 1
+cd $src_dir
+git diff --relative --no-color HEAD^..HEAD >/var/tmp/diff.patch
+
+cd $svn_dir/1
+patch -p1 < /var/tmp/diff.patch
 
 cd $svn_dir/1
 svn_rm_deleted
