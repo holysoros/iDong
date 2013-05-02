@@ -31,7 +31,7 @@ svn co https://svn.sinaapp.com/holyweibo/ $svn_dir --username holysoros@163.com 
 echo "Sync from git repository"
 
 # `1` is the revision of sae application
-rm -rf $svn_dir/1/*
+#rm -rf $svn_dir/1/*
 cp -rf $src_dir/* $svn_dir/1/ || exit 1
 
 cd $svn_dir/1
